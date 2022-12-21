@@ -5,9 +5,10 @@ app = Flask(__name__)
 
 @app.route('/console')
 def console():
+    private_key = paramiko.RSAKey.from_private_key_file('/path/to/private.pem')
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect('localhost', username='user', password='password')
+    ssh.connect('remote_server_ip', username='user', pkey=private_key)
     chan = ssh.invoke_shell()
     return render_template('console.html', chan=chan)
 @app.route('/console/output')
