@@ -15,3 +15,8 @@ def console():
 def console_output():
     output = chan.recv(1024).decode('utf-8')
     return output
+
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
